@@ -1,0 +1,11 @@
+/raw/**/*
+!/raw/**/
+!/raw/**/*.wav
+!/raw/**/*.txt
+/raw/**/nobgm.wav
+
+/usewav
+
+pretrained_models
+
+*.zip

@@ -1,0 +1,30 @@
+name: Deploy Sounds
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build m3u8
+        run: |
+          cd scripts
+          bash ./copydata.sh
+          python3 ./genplaylist.py
+
+      - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: ${{ secrets.BLOB_UPLOAD_USER }}
+          server: ${{ secrets.BLOB_UPLOAD_HOST }}
+          ssh_private_key: ${{ secrets.BLOB_SFTP_KEY }}
+          sftp_only: true
+          delete_remote_files: true
+          local_path: "./usewav/*"
+          remote_path: "/blob.sakamata.ch/speakingclock/"
