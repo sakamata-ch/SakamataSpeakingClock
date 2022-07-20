@@ -26,6 +26,5 @@ jobs:
           server: ${{ secrets.BLOB_UPLOAD_HOST }}
           ssh_private_key: ${{ secrets.BLOB_SFTP_KEY }}
           sftp_only: true
-          delete_remote_files: true
           local_path: "./usewav/*"
           remote_path: "/blob.sakamata.ch/speakingclock/"
